@@ -1,0 +1,11 @@
+.container {
+  width: 50%;
+  border: 1px solid orange;
+  min-height: 600px;
+}
+
+@media (max-width: 850px) {
+  .container {
+    width: 95%;
+  }
+}

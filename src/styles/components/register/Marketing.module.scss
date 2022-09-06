@@ -1,0 +1,34 @@
+.container {
+  width: 50%;
+  min-height: 600px;
+  height: 700px;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  h3 {
+    color: var(--black-color);
+  }
+}
+
+.bullet {
+  margin-left: 1rem;
+  display: flex;
+  align-items: center;
+  p {
+    text-align: left;
+  }
+  svg {
+    font-size: 18px;
+    margin-right: 1rem;
+    color: var(--blue-color);
+  }
+}
+
+@media (max-width: 850px) {
+  .container {
+    width: 95%;
+    margin-bottom: 1rem;
+  }
+}

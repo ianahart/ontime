@@ -1,0 +1,30 @@
+:root {
+  --border-color: #e4e4e6;
+  --black-color: #2c3333;
+  --gray-color: #395b64;
+  --blue-color: #a5c9ca;
+  --white-color: #e7f6f2;
+  --error-color: #cc0000;
+  --box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.2);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  display: flex;
+  flex-direction: column;
+}
+.App {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.footer {
+  margin-top: auto;
+}
