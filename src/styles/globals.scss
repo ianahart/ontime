@@ -31,3 +31,9 @@ body {
 .footer {
   margin-top: auto;
 }
+
+.error {
+  font-size: 0.85rem;
+  color: var(--error-color);
+  text-align: center;
+}

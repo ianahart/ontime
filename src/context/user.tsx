@@ -1,6 +1,6 @@
 import { createContext, useState, useEffect } from 'react';
 import supabase from '../config/supabaseClient';
-import { IUserContext, ISignUp } from '../interfaces';
+import { IUserContext, IProfile, ISignUp, ISession, IUser } from '../interfaces';
 interface IChildren {
   children: React.ReactNode;
 }
@@ -8,24 +8,27 @@ interface IChildren {
 export const UserContext = createContext<IUserContext | null>(null);
 
 const UserContextProvider = ({ children }: IChildren) => {
-  const [user, setUser] = useState(null);
+  const [profile, setProfile] = useState<IProfile | null>(null);
+  const [session, setSession] = useState<ISession | null>(null);
   const [loading, setLoading] = useState(true);
   const [userExists, setUserExists] = useState<null | boolean>(null);
+  const [loginError, setLoginError] = useState('');
 
   useEffect(() => {
-    // Check active sessions and sets the user
     const session = supabase.auth.session();
+    setSession(session);
 
-    console.log(session?.user, 'asdas');
-    //@ts-ignore
-    setUser(session?.user ?? null);
+    const reFetchProfile = async (user: IUser) => {
+      await getProfile(user);
+    };
+    if (session?.user) {
+      reFetchProfile(session?.user);
+    }
+
     setLoading(false);
 
-    // Listen for changes on auth state (logged in, signed out, etc.)
     const { data: listener } = supabase.auth.onAuthStateChange(async (event, session) => {
       console.log(session);
-      // @ts-ignore
-      setUser(session?.user ?? null);
       setLoading(false);
     });
 
@@ -33,6 +36,23 @@ const UserContextProvider = ({ children }: IChildren) => {
       listener?.unsubscribe();
     };
   }, []);
+
+  const getProfile = async (user: IUser) => {
+    const profile = await supabase.from('profile').select().eq('id', user.id).single();
+    setProfile(profile.data);
+  };
+
+  const signIn = async (email: string, password: string) => {
+    const { user, error } = await supabase.auth.signIn({ email, password });
+    if (user) {
+      getProfile(user);
+    }
+
+    if (error) {
+      setLoginError(error.message);
+    }
+  };
+
   const signUp = async (data: ISignUp) => {
     await checkUserExists(data.email);
     await supabase.auth.signUp(
@@ -60,7 +80,10 @@ const UserContextProvider = ({ children }: IChildren) => {
   };
 
   const value = {
+    profile,
+    loginError,
     signUp,
+    signIn,
     userExists,
     setUserExists,
     checkUserExists,

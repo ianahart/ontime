@@ -1,6 +1,84 @@
 .container {
   min-height: 100vh;
-  background-image: url('../../images/login.png');
+  background-image: url('../../images/login.jpg');
   background-size: cover;
   background-position: center;
+}
+
+.link {
+  display: flex;
+  justify-content: flex-end;
+  a {
+    text-decoration: none;
+    margin: 1rem;
+    background: #dadae2;
+    padding: 0.5rem;
+    cursor: pointer;
+    border-radius: 20px;
+    color: #fff;
+    text-shadow: 2px 4px 3px rgba(0, 0, 0, 0.3);
+  }
+}
+
+.formContainer {
+  min-height: 500px;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  background: #fff;
+  width: 400px;
+  margin: 10rem auto 2rem auto;
+
+  header {
+    h3 {
+      color: var(--text-color);
+    }
+  }
+
+  form {
+    padding-top: 3rem;
+  }
+}
+
+.formGroup {
+  margin: 3rem auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  label {
+    width: 85%;
+    text-align: left;
+    color: var(--text-color);
+    font-size: 0.85rem;
+  }
+  input {
+    width: 85%;
+    border: 1px solid;
+    border-color: var(--border-color);
+    height: 35px;
+    border-radius: var(--border-radius);
+  }
+}
+
+.btnContainer {
+  margin-top: 5rem;
+  button {
+    height: 45px;
+    transition: all 0.25s ease-in;
+    background: var(--light-blue-color);
+    color: #fff;
+    border: none;
+    border-radius: var(--border-radius);
+    width: 85%;
+    font-size: 1rem;
+    cursor: pointer;
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .formContainer {
+    width: 95%;
+  }
 }
