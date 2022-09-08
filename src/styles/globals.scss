@@ -1,11 +1,15 @@
 :root {
   --border-color: #e4e4e6;
+  --text-color: #3c4257;
   --black-color: #2c3333;
   --gray-color: #395b64;
   --blue-color: #a5c9ca;
+  --light-blue-color: #0080ff;
   --white-color: #e7f6f2;
   --error-color: #cc0000;
   --box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.2);
+  --border-radius: 8px;
+  --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 * {
@@ -22,8 +26,7 @@ body {
 }
 .App {
   height: 100vh;
-  display: flex;
-  flex-direction: column;
+  flex: 1;
 }
 .footer {
   margin-top: auto;

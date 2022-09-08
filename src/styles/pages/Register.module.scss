@@ -4,7 +4,7 @@
   background-size: cover;
   background-position: center;
   width: 100%;
-  padding: 1rem;
+  padding: 3rem;
 }
 
 .content {
@@ -29,5 +29,8 @@
   .content {
     flex-direction: column;
     align-items: center;
+  }
+  .container {
+    padding: 1rem;
   }
 }

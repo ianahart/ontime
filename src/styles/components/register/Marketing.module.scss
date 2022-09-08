@@ -2,7 +2,6 @@
   width: 50%;
   min-height: 600px;
   height: 700px;
-  background: #fff;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -18,16 +17,20 @@
   align-items: center;
   p {
     text-align: left;
+    color: var(--text-color);
+    font-family: var(--font-family);
   }
   svg {
     font-size: 18px;
     margin-right: 1rem;
-    color: var(--blue-color);
+    color: var(--light-blue-color);
   }
 }
 
 @media (max-width: 850px) {
   .container {
+    background: #fffcfc;
+
     width: 95%;
     margin-bottom: 1rem;
   }

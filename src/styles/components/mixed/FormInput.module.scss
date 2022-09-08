@@ -1,0 +1,70 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  margin: 2.5rem 0;
+  width: 100%;
+  label {
+    text-align: left;
+    color: var(--text-color);
+    width: 85%;
+    margin: 0 auto;
+    margin-bottom: 0.5rem;
+  }
+
+  input {
+    border: 1px solid var(--border-color);
+    height: 35px;
+    border-radius: var(--border-radius);
+    width: 85%;
+    margin: 0 auto;
+  }
+}
+
+.inputContainer {
+  position: relative;
+}
+
+.eye {
+  position: absolute;
+  top: 5px;
+  right: 45px;
+  cursor: pointer;
+  svg {
+    color: var(--blue-color);
+    font-size: 18px;
+  }
+}
+
+@keyframes slideover {
+  0% {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.error {
+  color: var(--error-color);
+  text-align: center;
+  font-size: 0.85rem;
+}
+
+.passwordHelper {
+  animation-name: slideover;
+  animation-duration: 0.3s;
+}
+
+.iconContainer {
+  display: flex;
+  p {
+    margin: 0;
+    margin-right: 0.5rem;
+    color: #fff;
+    background: var(--black-color);
+    border-radius: var(--border-radius);
+    padding: 0.25rem;
+  }
+}
