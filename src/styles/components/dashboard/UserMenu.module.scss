@@ -9,6 +9,23 @@
   position: relative;
 }
 
+.settings {
+  display: flex;
+  align-items: center;
+  margin-left: 0.5rem;
+  cursor: pointer;
+  svg {
+    font-size: 1rem;
+    color: var(--text-color);
+  }
+  a {
+    color: var(--text-color);
+    margin-left: 0.25rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-decoration: none;
+  }
+}
+
 .logout {
   display: flex;
   align-items: center;
@@ -16,6 +33,7 @@
   cursor: pointer;
   svg {
     font-size: 1rem;
+    color: var(--text-color);
   }
   p {
     color: var(--text-color);
@@ -29,6 +47,7 @@
   background: var(--light-blue-color);
   border-top-left-radius: var(--border-radius);
   border-top-right-radius: var(--border-radius);
+  margin-bottom: 1rem;
   p {
     margin: 0;
     padding: 0.25rem;

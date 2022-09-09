@@ -7,6 +7,7 @@ import Footer from './components/Mixed/Footer';
 import Dashboard from './pages/Dashboard';
 import RequireAuth from './components/Mixed/RequireAuth';
 import RequireGuest from './components/Mixed/RequireGuest';
+import Settings from './pages/Settings';
 
 function App() {
   return (
@@ -34,6 +35,14 @@ function App() {
             element={
               <RequireAuth>
                 <Dashboard />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/settings"
+            element={
+              <RequireAuth>
+                <Settings />
               </RequireAuth>
             }
           />

@@ -1,6 +1,7 @@
 import { useRef, useCallback, useState, useContext } from 'react';
 import { FaUserCircle } from 'react-icons/fa';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
+import { FiSettings } from 'react-icons/fi';
 import { MdLogout } from 'react-icons/md';
 import userMenuStyles from '../../styles/components/dashboard/UserMenu.module.scss';
 import { useEffectOnce } from '../../hooks/UseEffectOnce';
@@ -48,6 +49,10 @@ const UserMenu = () => {
         <div ref={menuRef} className={userMenuStyles.userMenu}>
           <div className={userMenuStyles.header}>
             <p>{profile?.full_name}</p>
+          </div>
+          <div className={userMenuStyles.settings}>
+            <FiSettings />
+            <Link to="/settings">Settings</Link>
           </div>
           <div onClick={handleOnSignOut} className={userMenuStyles.logout}>
             <MdLogout />
