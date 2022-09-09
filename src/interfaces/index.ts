@@ -24,6 +24,8 @@ export interface IUserContext {
   signIn: (email: string, password: string) => void;
   signUp: ({ email, full_name, password }: ISignUp) => void;
   signOut: () => void;
+  updateUserFullName: (name: string) => void;
+  updateUserAvatar: (file: File) => void;
   setUserExists: (userExists: boolean | null) => void;
 }
 

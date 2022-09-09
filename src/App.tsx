@@ -5,6 +5,7 @@ import Register from './pages/Register';
 import Login from './pages/Login';
 import Footer from './components/Mixed/Footer';
 import Dashboard from './pages/Dashboard';
+import Navbar from './components/Mixed/Navbar';
 import RequireAuth from './components/Mixed/RequireAuth';
 import RequireGuest from './components/Mixed/RequireGuest';
 import Settings from './pages/Settings';
@@ -13,6 +14,7 @@ function App() {
   return (
     <div className="App">
       <Router>
+        <Navbar />
         <Routes>
           <Route
             path="/sign-up"

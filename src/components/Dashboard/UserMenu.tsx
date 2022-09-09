@@ -20,7 +20,6 @@ const UserMenu = () => {
     const target = e.target as Element;
     if (menuRef.current !== null && triggerRef.current !== null) {
       if (!menuRef.current.contains(target) && target !== triggerRef.current) {
-        console.log('close menu');
         setMenuOpen(false);
       }
     }
@@ -43,7 +42,15 @@ const UserMenu = () => {
   return (
     <div onClick={handleOpenMenu}>
       <div ref={triggerRef} className={userMenuStyles.userIcon}>
-        <FaUserCircle />
+        {profile?.avatar_url ? (
+          <img
+            className={userMenuStyles.profilePicture}
+            src={profile?.avatar_url}
+            alt="profile image"
+          />
+        ) : (
+          <FaUserCircle />
+        )}
       </div>
       {menuOpen && (
         <div ref={menuRef} className={userMenuStyles.userMenu}>

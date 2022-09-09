@@ -28,7 +28,7 @@ const UserContextProvider = ({ children }: IChildren) => {
     setLoading(false);
 
     const { data: listener } = supabase.auth.onAuthStateChange(async (event, session) => {
-      console.log(session);
+      setSession(session);
       setLoading(false);
     });
 
@@ -74,6 +74,23 @@ const UserContextProvider = ({ children }: IChildren) => {
     );
   };
 
+  const updateUserFullName = async (newName: string) => {
+    const { data, error } = await supabase
+      .from('profile')
+      .update({ full_name: newName })
+      .match({ id: session?.user?.id });
+
+    await supabase.auth.update({
+      data: { full_name: newName },
+    });
+    if (!error) {
+      setProfile((prevState: any) => ({
+        ...prevState,
+        full_name: newName,
+      }));
+    }
+  };
+
   const checkUserExists = async (email: string) => {
     const { data } = await supabase.from('profile').select('id').eq('email', email);
 
@@ -85,10 +102,32 @@ const UserContextProvider = ({ children }: IChildren) => {
     setUserExists(null);
   };
 
+  const updateUserAvatar = async (file: File) => {
+    const now = new Date();
+    const secondsSinceEpoch = Math.round(now.getTime() / 1000);
+    const filePath = `${session?.user?.id}/${secondsSinceEpoch}-${file.name}`;
+    await supabase.storage.from('avatars').upload(filePath, file, {
+      cacheControl: '3600',
+      upsert: false,
+    });
+    const { publicURL } = supabase.storage.from('avatars').getPublicUrl(filePath);
+    await supabase
+      .from('profile')
+      .update({ avatar_url: publicURL })
+      .match({ id: session?.user?.id });
+
+    setProfile((prevState: any) => ({
+      ...prevState,
+      avatar_url: publicURL,
+    }));
+  };
+
   const value = {
     profile,
     loginError,
     signUp,
+    updateUserFullName,
+    updateUserAvatar,
     signOut,
     signIn,
     userExists,
