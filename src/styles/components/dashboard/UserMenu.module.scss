@@ -1,0 +1,49 @@
+.userIcon {
+  cursor: pointer;
+  svg {
+    font-size: 2.7rem;
+    color: var(--blue-color);
+    cursor: pointer;
+    pointer-events: none;
+  }
+  position: relative;
+}
+
+.logout {
+  display: flex;
+  align-items: center;
+  margin-left: 0.5rem;
+  cursor: pointer;
+  svg {
+    font-size: 1rem;
+  }
+  p {
+    color: var(--text-color);
+    margin-left: 0.25rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+}
+
+.header {
+  height: 40px;
+  background: var(--light-blue-color);
+  border-top-left-radius: var(--border-radius);
+  border-top-right-radius: var(--border-radius);
+  p {
+    margin: 0;
+    padding: 0.25rem;
+    color: #fff;
+  }
+}
+
+.userMenu {
+  position: absolute;
+  top: 30px;
+  z-index: 5;
+  right: 30px;
+  background: #fff;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  min-height: 300px;
+  width: 180px;
+}

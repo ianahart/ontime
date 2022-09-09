@@ -8,7 +8,6 @@ const RequireAuth: React.FC<Props> = ({ children }): JSX.Element => {
   const location = useLocation();
   const session = supabase.auth.session();
 
-  console.log(session?.user);
   if (session?.user !== null && session?.user !== undefined) {
     return children;
   } else {

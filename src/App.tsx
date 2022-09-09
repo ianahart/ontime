@@ -6,14 +6,29 @@ import Login from './pages/Login';
 import Footer from './components/Mixed/Footer';
 import Dashboard from './pages/Dashboard';
 import RequireAuth from './components/Mixed/RequireAuth';
+import RequireGuest from './components/Mixed/RequireGuest';
 
 function App() {
   return (
     <div className="App">
       <Router>
         <Routes>
-          <Route path="/sign-up" element={<Register />} />
-          <Route path="/" element={<Login />} />
+          <Route
+            path="/sign-up"
+            element={
+              <RequireGuest>
+                <Register />
+              </RequireGuest>
+            }
+          />
+          <Route
+            path="/"
+            element={
+              <RequireGuest>
+                <Login />
+              </RequireGuest>
+            }
+          />
           <Route
             path="/dashboard"
             element={

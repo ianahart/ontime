@@ -48,11 +48,16 @@ const Login = () => {
 
           <div className={loginStyles.formGroup}>
             <label>Email</label>
-            <input name="email" onChange={handleOnChange} value={email} />
+            <input type="email" name="email" onChange={handleOnChange} value={email} />
           </div>
           <div className={loginStyles.formGroup}>
             <label>Password</label>
-            <input name="password" onChange={handleOnChange} value={password} />
+            <input
+              type="password"
+              name="password"
+              onChange={handleOnChange}
+              value={password}
+            />
           </div>
           <div className={loginStyles.btnContainer}>
             <button type="submit">Continue</button>

@@ -42,6 +42,12 @@ const UserContextProvider = ({ children }: IChildren) => {
     setProfile(profile.data);
   };
 
+  const signOut = async () => {
+    await supabase.auth.signOut();
+    setProfile(null);
+    setSession(null);
+  };
+
   const signIn = async (email: string, password: string) => {
     const { user, error } = await supabase.auth.signIn({ email, password });
     if (user) {
@@ -83,6 +89,7 @@ const UserContextProvider = ({ children }: IChildren) => {
     profile,
     loginError,
     signUp,
+    signOut,
     signIn,
     userExists,
     setUserExists,

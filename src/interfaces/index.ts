@@ -23,6 +23,7 @@ export interface IUserContext {
   userExists: boolean | null;
   signIn: (email: string, password: string) => void;
   signUp: ({ email, full_name, password }: ISignUp) => void;
+  signOut: () => void;
   setUserExists: (userExists: boolean | null) => void;
 }
 
