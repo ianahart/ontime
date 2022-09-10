@@ -7,26 +7,22 @@ import {
   useEffect,
   useState,
 } from 'react';
-import {
-  AiOutlineCheckCircle,
-  AiOutlineCloseCircle,
-  AiOutlineUpload,
-} from 'react-icons/ai';
+import { AiOutlineCheckCircle } from 'react-icons/ai';
+import { useNavigate } from 'react-router-dom';
 import { BiArrowBack } from 'react-icons/bi';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { UserContext } from '../context/user';
-import { useEffectOnce } from '../hooks/UseEffectOnce';
 import { IUserContext } from '../interfaces';
 import settingsStyles from '../styles/components/settings/Settings.module.scss';
 
 const Settings = () => {
+  const navigate = useNavigate();
   const { profile, updateUserFullName, updateUserAvatar } = useContext(
     UserContext
   ) as IUserContext;
   const [fullName, setFullName] = useState('');
   const [file, setFile] = useState<File | null>(null);
-  const [draggingOver, setDraggingOver] = useState(false);
 
   useEffect(() => {
     if (profile?.full_name) {
@@ -68,8 +64,16 @@ const Settings = () => {
     setFile(null);
   };
 
+  const goBack = () => {
+    navigate(-1);
+  };
+
   return (
     <div className={settingsStyles.container}>
+      <div onClick={goBack} className={settingsStyles.goBack}>
+        <BiArrowBack />
+        <p>Back</p>
+      </div>
       <div className={settingsStyles.formContainer}>
         <ToastContainer
           position="top-center"
