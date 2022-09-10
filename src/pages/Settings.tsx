@@ -4,6 +4,7 @@ import {
   FormEvent,
   MouseEvent,
   useContext,
+  useEffect,
   useState,
 } from 'react';
 import {
@@ -11,19 +12,27 @@ import {
   AiOutlineCloseCircle,
   AiOutlineUpload,
 } from 'react-icons/ai';
+import { BiArrowBack } from 'react-icons/bi';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { UserContext } from '../context/user';
+import { useEffectOnce } from '../hooks/UseEffectOnce';
 import { IUserContext } from '../interfaces';
 import settingsStyles from '../styles/components/settings/Settings.module.scss';
 
 const Settings = () => {
-  const { updateUserFullName, updateUserAvatar } = useContext(
+  const { profile, updateUserFullName, updateUserAvatar } = useContext(
     UserContext
   ) as IUserContext;
   const [fullName, setFullName] = useState('');
   const [file, setFile] = useState<File | null>(null);
   const [draggingOver, setDraggingOver] = useState(false);
+
+  useEffect(() => {
+    if (profile?.full_name) {
+      setFullName(profile?.full_name);
+    }
+  }, [profile?.full_name]);
 
   const handleTextChange = (e: ChangeEvent<HTMLInputElement>) => {
     setFullName(e.target.value);
@@ -52,13 +61,11 @@ const Settings = () => {
     if (fullName.trim().length > 0) {
       updateUserFullName(fullName);
     }
-
-    notify();
     if (file !== null) {
       updateUserAvatar(file);
     }
-    // upload file
-    // get public linnk
+    notify();
+    setFile(null);
   };
 
   return (
@@ -88,7 +95,16 @@ const Settings = () => {
           </div>
           <div className={settingsStyles.imageUploadContainer}>
             <label>Profile Picture</label>
-            <div onDrop={handleOnDrop} className={settingsStyles.imageUpload}>
+            <div
+              style={{
+                backgroundImage: `url(${profile?.avatar_url})`,
+                backgroundPosition: 'center',
+                backgroundSize: 'cover',
+                backgroundRepeat: 'no-repeat',
+              }}
+              onDrop={handleOnDrop}
+              className={settingsStyles.imageUpload}
+            >
               {file?.name && (
                 <div onClick={handleClearUpload} className={settingsStyles.clearUpload}>
                   <p>Clear</p>
