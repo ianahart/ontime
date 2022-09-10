@@ -9,7 +9,8 @@ import Navbar from './components/Mixed/Navbar';
 import RequireAuth from './components/Mixed/RequireAuth';
 import RequireGuest from './components/Mixed/RequireGuest';
 import Settings from './pages/Settings';
-
+import Bills from './components/Dashboard/Bills';
+import Home from './components/Dashboard/Home';
 function App() {
   return (
     <div className="App">
@@ -39,7 +40,25 @@ function App() {
                 <Dashboard />
               </RequireAuth>
             }
-          />
+          >
+            <Route
+              path="home"
+              element={
+                <RequireAuth>
+                  <Home />
+                </RequireAuth>
+              }
+            />
+
+            <Route
+              path="bills"
+              element={
+                <RequireAuth>
+                  <Bills />
+                </RequireAuth>
+              }
+            />
+          </Route>
           <Route
             path="/settings"
             element={
