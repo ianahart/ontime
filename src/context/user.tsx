@@ -38,7 +38,11 @@ const UserContextProvider = ({ children }: IChildren) => {
   }, []);
 
   const getProfile = async (user: IUser) => {
-    const profile = await supabase.from('profile').select().eq('id', user.id).single();
+    const profile = await supabase
+      .from<IProfile>('profile')
+      .select()
+      .eq('id', user.id)
+      .single();
     setProfile(profile.data);
   };
 
@@ -102,23 +106,47 @@ const UserContextProvider = ({ children }: IChildren) => {
     setUserExists(null);
   };
 
-  const updateUserAvatar = async (file: File) => {
-    const now = new Date();
-    const secondsSinceEpoch = Math.round(now.getTime() / 1000);
-    const filePath = `${session?.user?.id}/${secondsSinceEpoch}-${file.name}`;
-    await supabase.storage.from('avatars').upload(filePath, file, {
+  const preformUpdate = async (filePath: string, publicURL: string | null) => {
+    await supabase
+      .from('profile')
+      .update({ avatar_url: publicURL, file_name: filePath })
+      .match({ id: session?.user?.id });
+  };
+
+  const uploadToStorage = async (fileName: string, file: File) => {
+    await supabase.storage.from('avatars').upload(fileName, file, {
       cacheControl: '3600',
       upsert: false,
     });
-    const { publicURL } = supabase.storage.from('avatars').getPublicUrl(filePath);
-    await supabase
-      .from('profile')
-      .update({ avatar_url: publicURL })
-      .match({ id: session?.user?.id });
+  };
+
+  const deleteFromStorage = async (fileName: string) => {
+    await supabase.storage.from('avatars').remove([fileName]);
+  };
+
+  const createFileName = (file: File) => {
+    const now = new Date();
+    const secondsSinceEpoch = Math.round(now.getTime() / 1000);
+    const filePath = `${session?.user?.id}/${secondsSinceEpoch}-${file.name}`;
+
+    return filePath;
+  };
+
+  const updateUserAvatar = async (file: File) => {
+    const fileName = createFileName(file);
+
+    await uploadToStorage(fileName, file);
+    if (profile?.file_name) {
+      await deleteFromStorage(profile?.file_name);
+    }
+
+    const { publicURL } = supabase.storage.from('avatars').getPublicUrl(fileName);
+    await preformUpdate(fileName, publicURL);
 
     setProfile((prevState: any) => ({
       ...prevState,
       avatar_url: publicURL,
+      file_name: fileName,
     }));
   };
 

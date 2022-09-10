@@ -15,6 +15,7 @@ export interface IProfile {
   email: string;
   full_name: string;
   avatar_url: string;
+  file_name: string;
 }
 
 export interface IUserContext {
