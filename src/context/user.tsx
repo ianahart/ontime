@@ -161,6 +161,7 @@ const UserContextProvider = ({ children }: IChildren) => {
     userExists,
     setUserExists,
     checkUserExists,
+    session,
   };
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 };

@@ -28,10 +28,26 @@ export interface IProfile {
   file_name: string;
 }
 
+export interface IBillContext {
+  getBills: (user_id: string) => void;
+  bills: IBill[];
+}
+
+export interface IBill {
+  amount: number;
+  company: string;
+  date: Date;
+  user_id: string;
+  formatted_date: string;
+  id: number;
+  is_toggled: boolean;
+}
+
 export interface IUserContext {
   profile: IProfile | null;
   loginError: string;
   userExists: boolean | null;
+  session: ISession | null;
   signIn: (email: string, password: string) => void;
   signUp: ({ email, full_name, password }: ISignUp) => void;
   signOut: () => void;
