@@ -3,3 +3,9 @@ export const registerState = {
   email: { name: 'email', value: '', error: '', type: 'email' },
   password: { name: 'password', value: '', error: '', type: 'password' },
 };
+
+export const billFormState = {
+  company: { name: 'company', value: '', error: '' },
+  due_date: { name: 'due_date', value: new Date(), error: '' },
+  amount: { name: 'amount', value: '', error: '' },
+};

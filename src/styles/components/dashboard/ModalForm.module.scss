@@ -1,0 +1,102 @@
+.container {
+  background: rgba(0, 0, 0, 0.75);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transition: all 0.25s ease-in;
+  animation-name: slideup;
+  z-index: 3;
+  animation-duration: 0.3s;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+
+  form {
+    background: #fff;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    width: 400px;
+    h3 {
+      margin-top: 3rem;
+      color: var(--text-color);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+  }
+}
+
+.calendar {
+  display: flex;
+  justify-content: center;
+}
+
+@keyframes slideup {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 100%;
+  }
+}
+
+.btnContainer {
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-around;
+
+  button {
+    transition: all 0.25s ease-in;
+    border: none;
+    height: 40px;
+    width: 150px;
+    font-size: 1rem;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    &:hover {
+      opacity: 0.8;
+    }
+    &:first-of-type {
+      background: var(--light-blue-color);
+      color: #fff;
+    }
+    &:last-of-type {
+      background: transparent;
+      border: 2px solid;
+      border-color: var(--light-blue-color);
+    }
+  }
+}
+
+.error {
+  font-size: 0.85rem;
+  text-align: center;
+  color: var(--error-color);
+}
+
+.date {
+  width: 85%;
+  margin: 0 auto;
+  p {
+    color: var(--text-color);
+    text-align: left;
+  }
+}
+
+.dateInput {
+  min-height: 35px;
+  border-radius: var(--border-radius);
+  border: 1px solid;
+  border-color: var(--border-color);
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 600px) {
+  .container {
+    form {
+      width: 95%;
+    }
+  }
+}

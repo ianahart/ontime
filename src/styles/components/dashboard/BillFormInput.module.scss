@@ -1,0 +1,27 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  margin: 2.5rem 0;
+  width: 100%;
+  label {
+    text-align: left;
+    color: var(--text-color);
+    width: 85%;
+    margin: 0 auto;
+    margin-bottom: 0.5rem;
+  }
+
+  input {
+    border: 1px solid var(--border-color);
+    height: 35px;
+    border-radius: var(--border-radius);
+    width: 85%;
+    margin: 0 auto;
+  }
+}
+
+.error {
+  font-size: 0.85rem;
+  text-align: center;
+  color: var(--error-color);
+}

@@ -4,6 +4,16 @@ export interface IRegisterForm {
   password: { name: string; value: string; error: string; type: string };
 }
 
+export interface IBillForm {
+  company: { name: string; value: string; error: string };
+  due_date: {
+    name: string;
+    value: Date | [Date | null, Date | null] | null | undefined;
+    error: string;
+  };
+  amount: { name: string; value: string; error: string };
+}
+
 export interface ISignUp {
   full_name: string;
   email: string;
