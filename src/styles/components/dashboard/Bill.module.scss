@@ -1,0 +1,82 @@
+.pageWrapper {
+  margin: 5rem 0;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.formGroup {
+  position: relative;
+  height: 20px;
+  display: flex;
+  margin: 0 1rem;
+  label {
+    color: var(--text-color);
+    margin-right: 0.5rem;
+  }
+
+  input {
+    border: none;
+    outline: none;
+    border-bottom: 1px solid;
+    border-color: var(--border-color);
+    transition: all 0.2s ease-in;
+    &:focus {
+      border-bottom: 2px solid;
+      border-color: var(--light-blue-color);
+    }
+  }
+}
+
+.calendarInput {
+  border-bottom: 1px solid;
+  border-color: var(--border-color);
+  display: inline;
+  width: 140px;
+  font-size: 0.8rem;
+  color: var(--text-color);
+}
+
+.calendarBtn {
+  color: var(--blue-color);
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.calendarContainer {
+  position: relative;
+  label {
+    margin-right: 0.5rem;
+    color: var(--text-color);
+  }
+  input {
+    border: none;
+    border-bottom: 1px solid;
+    border-color: var(--border-color);
+  }
+}
+
+.calendar {
+  position: absolute;
+  z-index: 5;
+  top: 5px;
+  left: -100px;
+  margin: 3rem 0;
+}
+
+@media (max-width: 600px) {
+  .calendar {
+    left: 40px;
+    position: relative;
+    width: 230px;
+  }
+}
+
+@media (min-width: 375px) and (max-width: 580px) {
+  .calendar {
+    left: 50px;
+    width: 230px;
+  }
+}

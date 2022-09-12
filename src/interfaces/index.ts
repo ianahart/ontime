@@ -1,3 +1,5 @@
+import { Calendar } from '../types';
+
 export interface IRegisterForm {
   full_name: { name: string; value: string; error: string; type: string };
   email: { name: string; value: string; error: string; type: string };
@@ -31,12 +33,17 @@ export interface IProfile {
 export interface IBillContext {
   getBills: (user_id: string) => void;
   bills: IBill[];
+  insertBill: (user: string, form: IBillForm, formatted_date: string) => Promise<void>;
+  updateBillInput: (name: string, value: string, id: number) => Promise<void>;
+  updateBillCalendar: (formatted_date: string, date: Date, id: number) => Promise<void>;
+  handleBillChange: (name: string, value: string, id: number) => void;
 }
 
 export interface IBill {
+  [key: string]: any;
   amount: number;
   company: string;
-  date: Date;
+  due_date: Date;
   user_id: string;
   formatted_date: string;
   id: number;

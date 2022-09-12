@@ -3,11 +3,12 @@ import Calendar from 'react-calendar';
 import dayjs from 'dayjs';
 import 'react-calendar/dist/Calendar.css';
 import { billFormState } from '../../data/initialState';
-import { IBillForm, IUserContext } from '../../interfaces';
+import { IBillContext, IBillForm, IUserContext } from '../../interfaces';
 import modalFormStyles from '../../styles/components/dashboard/ModalForm.module.scss';
 import BillFormInput from './BillFormInput';
 import supabase from '../../config/supabaseClient';
 import { UserContext } from '../../context/user';
+import { BillContext } from '../../context/bill';
 
 interface IModalFormProps {
   handleCloseModalForm: () => void;
@@ -16,6 +17,7 @@ interface IModalFormProps {
 export type CalendarDate = Date | [Date | null, Date | null] | null | undefined;
 
 const ModalForm = ({ handleCloseModalForm }: IModalFormProps) => {
+  const { insertBill } = useContext(BillContext) as IBillContext;
   const { session } = useContext(UserContext) as IUserContext;
   const [form, setForm] = useState<IBillForm>(billFormState);
   const [error, setError] = useState('');
@@ -43,22 +45,12 @@ const ModalForm = ({ handleCloseModalForm }: IModalFormProps) => {
       setError('Please fill out all fields.');
       return;
     }
-    await insertBill();
+    if (session) {
+      const user = session?.user?.id as string;
+      await insertBill(user, form, formattedDate);
+    }
     handleCloseModalForm();
   };
-
-  const insertBill = async () => {
-    const { data, error } = await supabase.from('bills').insert([
-      {
-        user_id: session?.user?.id,
-        amount: parseInt(form.amount.value),
-        company: form.company.value,
-        date: form.due_date.value,
-        formatted_date: formattedDate,
-      },
-    ]);
-  };
-
   const validateEmptyFields = () => {
     let empty = false;
     for (const [_, field] of Object.entries(form)) {

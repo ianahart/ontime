@@ -6,9 +6,11 @@ import { UserContext } from '../../context/user';
 import { IBillContext, IUserContext } from '../../interfaces';
 import { BillContext } from '../../context/bill';
 import { useEffectOnce } from '../../hooks/UseEffectOnce';
+import Bill from './Bill';
+import { nanoid } from 'nanoid';
 const Bills = () => {
   const [modalFormOpen, setModalFormOpen] = useState(false);
-  const { getBills } = useContext(BillContext) as IBillContext;
+  const { getBills, bills } = useContext(BillContext) as IBillContext;
   const handleOpenModalForm = () => {
     setModalFormOpen(true);
   };
@@ -20,13 +22,20 @@ const Bills = () => {
   useEffectOnce(() => {
     const session = localStorage.getItem('supabase.auth.token');
     const user = JSON.parse(session ?? '').currentSession.user;
-    console.log(user.id);
-    getBills(user.id);
+    if (!bills.length) {
+      getBills(user.id);
+    }
   });
 
   return (
     <div className={billsStyles.container}>
       {modalFormOpen && <ModalForm handleCloseModalForm={handleCloseModalForm} />}
+      <div className={billsStyles.billsContainer}>
+        {bills.map((bill) => {
+          return <Bill key={nanoid()} bill={bill} />;
+        })}
+      </div>
+      <div style={{ margin: '4rem 0' }}></div>
       <div
         onClick={handleOpenModalForm}
         role="button"
