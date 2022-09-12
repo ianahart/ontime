@@ -1,10 +1,18 @@
 import billStyles from '../../styles/components/dashboard/Bill.module.scss';
 import { IBill, IBillContext, IBillForm } from '../../interfaces';
-import { useRef, useContext, useCallback, useState, ChangeEvent } from 'react';
+import {
+  useRef,
+  useContext,
+  useCallback,
+  MouseEvent,
+  useState,
+  ChangeEvent,
+} from 'react';
 import Calendar from 'react-calendar';
 import { useEffectOnce } from '../../hooks/UseEffectOnce';
 import dayjs from 'dayjs';
 import 'react-calendar/dist/Calendar.css';
+import { BsTrash } from 'react-icons/bs';
 import { billFormState } from '../../data/initialState';
 import { BillContext } from '../../context/bill';
 import { CalendarDate } from './ModalForm';
@@ -13,16 +21,16 @@ interface IBillProps {
 }
 
 const Bill = ({ bill }: IBillProps) => {
-  const { updateBillInput, handleBillChange, updateBillCalendar } = useContext(
-    BillContext
-  ) as IBillContext;
+  const { updateBillInput, deleteBill, handleBillChange, updateBillCalendar } =
+    useContext(BillContext) as IBillContext;
+  const [trashOpen, setTrashOpen] = useState(false);
   const [showCalendar, setShowCalendar] = useState(false);
   const [company, setCompany] = useState(bill.company ?? '');
   const [amount, setAmount] = useState<string | number>(bill.amount ?? '');
   const calendarRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLParagraphElement>(null);
 
-  const clickAway = useCallback((e: MouseEvent) => {
+  const clickAway = useCallback((e: Event) => {
     e.stopPropagation();
     const target = e.target as Element;
     if (calendarRef.current !== null && triggerRef.current !== null) {
@@ -59,6 +67,17 @@ const Bill = ({ bill }: IBillProps) => {
     } else if (name === 'amount') {
       setAmount(value);
     }
+  };
+
+  const handleDelete = (e: MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
+    deleteBill(bill.id);
+    setTrashOpen(false);
+  };
+
+  const cancelDelete = (e: MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
+    setTrashOpen(false);
   };
 
   return (
@@ -101,6 +120,27 @@ const Bill = ({ bill }: IBillProps) => {
             name="amount"
             onBlur={handleOnBlur}
           />
+        </div>
+      </div>
+      <div className={billStyles.options}>
+        {trashOpen && (
+          <div className={billStyles.modal}>
+            <div className={billStyles.deleteContainer}>
+              <div className={billStyles.warning}>
+                <p>
+                  Are you sure you want to delete this bill from{' '}
+                  <span>{bill.company}</span> ?
+                </p>
+              </div>
+              <div className={billStyles.btnContainer}>
+                <button onClick={handleDelete}>Yes</button>
+                <button onClick={cancelDelete}>Cancel</button>
+              </div>
+            </div>
+          </div>
+        )}
+        <div onClick={() => setTrashOpen(true)}>
+          <BsTrash />
         </div>
       </div>
     </div>

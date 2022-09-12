@@ -37,6 +37,7 @@ export interface IBillContext {
   updateBillInput: (name: string, value: string, id: number) => Promise<void>;
   updateBillCalendar: (formatted_date: string, date: Date, id: number) => Promise<void>;
   handleBillChange: (name: string, value: string, id: number) => void;
+  deleteBill: (id: number) => Promise<void>;
 }
 
 export interface IBill {

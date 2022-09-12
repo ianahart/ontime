@@ -69,6 +69,12 @@ const BillContextProvider = ({ children }: IChildren) => {
       .match({ id });
   };
 
+  const deleteBill = async (id: number) => {
+    const filtered = bills.filter((bill) => bill.id !== id);
+    setBills(filtered);
+    await supabase.from('bills').delete().match({ id });
+  };
+
   const value = {
     getBills,
     bills,
@@ -76,6 +82,7 @@ const BillContextProvider = ({ children }: IChildren) => {
     updateBillInput,
     handleBillChange,
     updateBillCalendar,
+        deleteBill,
   };
   return <BillContext.Provider value={value}>{children}</BillContext.Provider>;
 };
