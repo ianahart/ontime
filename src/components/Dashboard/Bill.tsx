@@ -1,6 +1,7 @@
 import billStyles from '../../styles/components/dashboard/Bill.module.scss';
 import { IBill, IBillContext, IBillForm } from '../../interfaces';
 import {
+  useEffect,
   useRef,
   useContext,
   useCallback,
@@ -25,8 +26,8 @@ const Bill = ({ bill }: IBillProps) => {
     useContext(BillContext) as IBillContext;
   const [trashOpen, setTrashOpen] = useState(false);
   const [showCalendar, setShowCalendar] = useState(false);
-  const [company, setCompany] = useState(bill.company ?? '');
-  const [amount, setAmount] = useState<string | number>(bill.amount ?? '');
+  const [company, setCompany] = useState(bill.company);
+  const [amount, setAmount] = useState<string | number>(bill.amount);
   const calendarRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLParagraphElement>(null);
 
@@ -39,7 +40,6 @@ const Bill = ({ bill }: IBillProps) => {
       }
     }
   }, []);
-
   useEffectOnce(() => {
     window.addEventListener('click', clickAway);
     return () => window.addEventListener('click', clickAway);

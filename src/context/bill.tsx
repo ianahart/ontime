@@ -33,7 +33,7 @@ const BillContextProvider = ({ children }: IChildren) => {
       },
     ]);
     if (data) {
-      setBills((prevState: any) => [...prevState, data]);
+      setBills((prevState: any) => [...prevState, ...data]);
     }
   };
 
@@ -82,7 +82,7 @@ const BillContextProvider = ({ children }: IChildren) => {
     updateBillInput,
     handleBillChange,
     updateBillCalendar,
-        deleteBill,
+    deleteBill,
   };
   return <BillContext.Provider value={value}>{children}</BillContext.Provider>;
 };
