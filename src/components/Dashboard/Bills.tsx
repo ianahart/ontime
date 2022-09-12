@@ -10,7 +10,9 @@ import Bill from './Bill';
 import { nanoid } from 'nanoid';
 const Bills = () => {
   const [modalFormOpen, setModalFormOpen] = useState(false);
-  const { getBills, bills } = useContext(BillContext) as IBillContext;
+  const { getBills, billTotal, bills, calcBillTotal } = useContext(
+    BillContext
+  ) as IBillContext;
   const handleOpenModalForm = () => {
     setModalFormOpen(true);
   };
@@ -27,6 +29,10 @@ const Bills = () => {
     }
   });
 
+  useEffect(() => {
+    calcBillTotal();
+  }, [calcBillTotal, bills.length]);
+
   return (
     <div className={billsStyles.container}>
       {modalFormOpen && <ModalForm handleCloseModalForm={handleCloseModalForm} />}
@@ -36,6 +42,15 @@ const Bills = () => {
         })}
       </div>
       <div style={{ margin: '4rem 0' }}></div>
+      <div className={billsStyles.billTotal}>
+        <p className={billsStyles.runningTotal}>Running Total: 0</p>
+
+        <p>Total</p>
+        <div className={billsStyles.row}>
+          <div className={billsStyles.divider}></div>
+          <p>${billTotal}</p>
+        </div>
+      </div>
       <div
         onClick={handleOpenModalForm}
         role="button"

@@ -33,6 +33,26 @@
   }
 }
 
+.runningTotal {
+  text-align: right;
+  margin: 1rem;
+  color: var(--text-color);
+}
+.row {
+  display: flex;
+  align-items: center;
+  p {
+    color: var(--text-color);
+  }
+}
+
+.divider {
+  height: 2px;
+  width: 90%;
+  background: var(--border-color);
+  margin-right: 1rem;
+}
+
 @media (max-width: 600px) {
   .addBillContainer {
     right: 12px;

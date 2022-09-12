@@ -10,6 +10,14 @@ export const BillContext = createContext<IBillContext | null>(null);
 
 const BillContextProvider = ({ children }: IChildren) => {
   const [bills, setBills] = useState<IBill[]>([]);
+  const [billTotal, setBillTotal] = useState(0);
+
+  const calcBillTotal = () => {
+    const billTotal = bills.reduce((acc, curr) => {
+      return (acc += curr.amount);
+    }, 0);
+    setBillTotal(billTotal);
+  };
 
   const getBills = async (user_id: string) => {
     const { data } = await supabase
@@ -78,11 +86,13 @@ const BillContextProvider = ({ children }: IChildren) => {
   const value = {
     getBills,
     bills,
+    billTotal,
     insertBill,
     updateBillInput,
     handleBillChange,
     updateBillCalendar,
     deleteBill,
+    calcBillTotal,
   };
   return <BillContext.Provider value={value}>{children}</BillContext.Provider>;
 };

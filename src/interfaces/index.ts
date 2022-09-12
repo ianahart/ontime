@@ -33,11 +33,13 @@ export interface IProfile {
 export interface IBillContext {
   getBills: (user_id: string) => void;
   bills: IBill[];
+  billTotal: number;
   insertBill: (user: string, form: IBillForm, formatted_date: string) => Promise<void>;
   updateBillInput: (name: string, value: string, id: number) => Promise<void>;
   updateBillCalendar: (formatted_date: string, date: Date, id: number) => Promise<void>;
   handleBillChange: (name: string, value: string, id: number) => void;
   deleteBill: (id: number) => Promise<void>;
+  calcBillTotal: () => void;
 }
 
 export interface IBill {
