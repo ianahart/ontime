@@ -38,13 +38,11 @@ const Bills = () => {
       {modalFormOpen && <ModalForm handleCloseModalForm={handleCloseModalForm} />}
       <div className={billsStyles.billsContainer}>
         {bills.map((bill) => {
-          return <Bill key={nanoid()} bill={bill} />;
+          return <Bill key={bill.id} bill={bill} />;
         })}
       </div>
       <div style={{ margin: '4rem 0' }}></div>
       <div className={billsStyles.billTotal}>
-        <p className={billsStyles.runningTotal}>Running Total: 0</p>
-
         <p>Total</p>
         <div className={billsStyles.row}>
           <div className={billsStyles.divider}></div>

@@ -13,8 +13,13 @@ const BillContextProvider = ({ children }: IChildren) => {
   const [billTotal, setBillTotal] = useState(0);
 
   const calcBillTotal = () => {
-    const billTotal = bills.reduce((acc, curr) => {
-      return (acc += curr.amount);
+    // @ts-ignore
+    const billTotal = bills.reduce((acc, { is_toggled, amount }) => {
+      if (is_toggled) {
+        return acc + amount;
+      } else {
+        return acc;
+      }
     }, 0);
     setBillTotal(billTotal);
   };
@@ -83,6 +88,15 @@ const BillContextProvider = ({ children }: IChildren) => {
     await supabase.from('bills').delete().match({ id });
   };
 
+  const toggleRunningBtn = async (id: number, is_toggled: boolean) => {
+    const updated = bills.map((bill) => {
+      return bill.id === id ? { ...bill, is_toggled } : bill;
+    });
+    setBills(updated);
+
+    await supabase.from('bills').update({ is_toggled }).match({ id });
+  };
+
   const value = {
     getBills,
     bills,
@@ -91,6 +105,7 @@ const BillContextProvider = ({ children }: IChildren) => {
     updateBillInput,
     handleBillChange,
     updateBillCalendar,
+    toggleRunningBtn,
     deleteBill,
     calcBillTotal,
   };

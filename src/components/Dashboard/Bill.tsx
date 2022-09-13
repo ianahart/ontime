@@ -1,7 +1,6 @@
 import billStyles from '../../styles/components/dashboard/Bill.module.scss';
 import { IBill, IBillContext, IBillForm } from '../../interfaces';
 import {
-  useEffect,
   useRef,
   useContext,
   useCallback,
@@ -17,13 +16,19 @@ import { BsTrash } from 'react-icons/bs';
 import { billFormState } from '../../data/initialState';
 import { BillContext } from '../../context/bill';
 import { CalendarDate } from './ModalForm';
+import ToggleBtn from './ToggleBtn';
 interface IBillProps {
   bill: IBill;
 }
 
 const Bill = ({ bill }: IBillProps) => {
-  const { updateBillInput, deleteBill, handleBillChange, updateBillCalendar } =
-    useContext(BillContext) as IBillContext;
+  const {
+    updateBillInput,
+    toggleRunningBtn,
+    deleteBill,
+    handleBillChange,
+    updateBillCalendar,
+  } = useContext(BillContext) as IBillContext;
   const [trashOpen, setTrashOpen] = useState(false);
   const [showCalendar, setShowCalendar] = useState(false);
   const [company, setCompany] = useState(bill.company);
@@ -142,6 +147,7 @@ const Bill = ({ bill }: IBillProps) => {
         <div onClick={() => setTrashOpen(true)}>
           <BsTrash />
         </div>
+        <ToggleBtn id={bill.id} is_toggled={bill.is_toggled} />
       </div>
     </div>
   );

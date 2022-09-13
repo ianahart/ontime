@@ -39,6 +39,7 @@ export interface IBillContext {
   updateBillCalendar: (formatted_date: string, date: Date, id: number) => Promise<void>;
   handleBillChange: (name: string, value: string, id: number) => void;
   deleteBill: (id: number) => Promise<void>;
+  toggleRunningBtn: (id: number, is_toggled: boolean) => Promise<void>;
   calcBillTotal: () => void;
 }
 

@@ -69,6 +69,7 @@
 .options {
   display: flex;
   justify-content: flex-start;
+  align-items: center;
   margin-left: 1rem;
   svg {
     cursor: pointer;
@@ -157,6 +158,58 @@
   }
   .deleteContainer {
     width: 95%;
+  }
+}
+
+.toggleBtnContainer {
+  border: 1px solid;
+  border-color: var(--border-color);
+  width: 60px;
+  cursor: pointer;
+  border-radius: 40px;
+  height: 35px;
+  margin-left: 1rem;
+}
+
+.toggleOn {
+  transition: all 0.25s ease-in;
+  animation-name: slideright;
+  animation-duration: 0.3s;
+  animation-timing-function: linear;
+  height: 35px;
+  border-radius: 40px;
+  width: 30px;
+  background: var(--border-color);
+  animation-fill-mode: forwards;
+}
+
+.toggleOff {
+  transition: all 0.25s ease-in;
+  animation-name: slideleft;
+  animation-duration: 0.3s;
+  animation-fill-mode: forwards;
+  height: 35px;
+  border-radius: 40px;
+  width: 30px;
+  background: var(--border-color);
+}
+
+@keyframes slideright {
+  0% {
+    transform: translateX(-40px);
+  }
+
+  10% {
+    transform: translateX(20px);
+  }
+}
+
+@keyframes slideleft {
+  0% {
+    transform: translateX(0px);
+  }
+  100% {
+    transform: translateX(30px);
   }
 }
 
