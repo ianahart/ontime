@@ -35,6 +35,21 @@ export interface INote {
   note: string;
 }
 
+export interface IBackground {
+  background_file_name: string;
+  background_url: string;
+  created_at: string;
+  id: number | null;
+  user_id: string;
+}
+
+export interface IBackgroundContext {
+  uploadBackground: (file: File, file_name: string, user_id: string) => Promise<void>;
+  background: IBackground;
+  getBackground: (user_id: string) => Promise<void>;
+  resetBackground: () => void;
+}
+
 export interface INoteContext {
   saveNote: (new_note: string, user_id: string) => Promise<void>;
   getNote: (user_id: string) => Promise<INote | void>;
@@ -45,6 +60,7 @@ export interface IBillContext {
   getBills: (user_id: string) => void;
   bills: IBill[];
   billTotal: number;
+  resetBills: () => void;
   insertBill: (user: string, form: IBillForm, formatted_date: string) => Promise<void>;
   updateBillInput: (name: string, value: string, id: number) => Promise<void>;
   updateBillCalendar: (formatted_date: string, date: Date, id: number) => Promise<void>;

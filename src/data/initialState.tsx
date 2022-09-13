@@ -9,3 +9,11 @@ export const billFormState = {
   due_date: { name: 'due_date', value: new Date(), error: '' },
   amount: { name: 'amount', value: '', error: '' },
 };
+
+export const backgroundState = {
+  background_file_name: '',
+  background_url: '',
+  created_at: '',
+  id: null,
+  user_id: '',
+};

@@ -1,12 +1,14 @@
 import { useEffect, ChangeEvent, FormEvent, useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import { BackgroundContext } from '../context/background';
 import { UserContext } from '../context/user';
-import { IUserContext } from '../interfaces';
+import { IBackgroundContext, IUserContext } from '../interfaces';
 import loginStyles from '../styles/pages/Login.module.scss';
 
 const Login = () => {
   const navigate = useNavigate();
+  const { getBackground } = useContext(BackgroundContext) as IBackgroundContext;
   const { profile, signIn, loginError } = useContext(UserContext) as IUserContext;
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -24,9 +26,13 @@ const Login = () => {
 
   useEffect(() => {
     if (profile !== null) {
+      const fetch = async () => {
+        await getBackground(profile.id);
+      };
+      fetch();
       navigate('/dashboard');
     }
-  }, [profile, navigate]);
+  }, [profile, navigate, getBackground]);
 
   const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.target;

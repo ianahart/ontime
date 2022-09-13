@@ -12,6 +12,11 @@ const BillContextProvider = ({ children }: IChildren) => {
   const [bills, setBills] = useState<IBill[]>([]);
   const [billTotal, setBillTotal] = useState(0);
 
+  const resetBills = () => {
+    setBills([]);
+    setBillTotal(0);
+  };
+
   const calcBillTotal = () => {
     // @ts-ignore
     const billTotal = bills.reduce((acc, { is_toggled, amount }) => {
@@ -101,6 +106,7 @@ const BillContextProvider = ({ children }: IChildren) => {
     getBills,
     bills,
     billTotal,
+    resetBills,
     insertBill,
     updateBillInput,
     handleBillChange,

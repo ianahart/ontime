@@ -6,16 +6,19 @@ import App from './App';
 import UserContextProvider from './context/user';
 import BillContextProvider from './context/bill';
 import NoteContextProvider from './context/note';
+import BackgroundContextProvider from './context/background';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
   <React.StrictMode>
     <UserContextProvider>
-      <BillContextProvider>
-        <NoteContextProvider>
-          <App />
-        </NoteContextProvider>
-      </BillContextProvider>
+      <BackgroundContextProvider>
+        <BillContextProvider>
+          <NoteContextProvider>
+            <App />
+          </NoteContextProvider>
+        </BillContextProvider>
+      </BackgroundContextProvider>
     </UserContextProvider>
   </React.StrictMode>
 );

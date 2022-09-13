@@ -6,11 +6,16 @@ import { MdLogout } from 'react-icons/md';
 import userMenuStyles from '../../styles/components/dashboard/UserMenu.module.scss';
 import { useEffectOnce } from '../../hooks/UseEffectOnce';
 import { UserContext } from '../../context/user';
-import { IUserContext } from '../../interfaces';
+import { IBackgroundContext, IBillContext, IUserContext } from '../../interfaces';
+import { BillContext } from '../../context/bill';
+import { backgroundState } from '../../data/initialState';
+import { BackgroundContext } from '../../context/background';
 
 const UserMenu = () => {
   const navigate = useNavigate();
   const { profile, signOut } = useContext(UserContext) as IUserContext;
+  const { resetBills } = useContext(BillContext) as IBillContext;
+  const { resetBackground } = useContext(BackgroundContext) as IBackgroundContext;
   const menuRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLDivElement>(null);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -36,6 +41,8 @@ const UserMenu = () => {
 
   const handleOnSignOut = async () => {
     await signOut();
+    resetBills();
+    resetBackground();
     navigate('/');
   };
 
