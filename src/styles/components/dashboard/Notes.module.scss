@@ -1,0 +1,46 @@
+.container {
+  width: 100%;
+  min-height: 100vh;
+}
+
+.quillContainer {
+  width: 800px;
+  margin: 0 auto;
+}
+
+.btnContainer {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 3rem;
+  margin-bottom: 2rem;
+}
+
+.edit {
+  border: none;
+  width: 100px;
+  height: 35px;
+  border-radius: 20px;
+  border: 1px solid;
+  border-color: var(--border-color);
+  font-weight: bold;
+  background: #fff;
+  cursor: pointer;
+}
+
+.save {
+  border: none;
+  font-weight: bold;
+  width: 100px;
+  height: 35px;
+  border-radius: 20px;
+  border: 1px solid;
+  background: var(--light-blue-color);
+  color: #fff;
+  cursor: pointer;
+}
+
+@media (max-width: 970px) {
+  .quillContainer {
+    width: 100%;
+  }
+}

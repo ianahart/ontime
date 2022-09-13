@@ -30,6 +30,17 @@ export interface IProfile {
   file_name: string;
 }
 
+export interface INote {
+  id: string;
+  note: string;
+}
+
+export interface INoteContext {
+  saveNote: (new_note: string, user_id: string) => Promise<void>;
+  getNote: (user_id: string) => Promise<INote | void>;
+  note: INote;
+}
+
 export interface IBillContext {
   getBills: (user_id: string) => void;
   bills: IBill[];
