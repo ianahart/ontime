@@ -12,6 +12,7 @@ import Settings from './pages/Settings';
 import Bills from './components/Dashboard/Bills';
 import Home from './components/Dashboard/Home';
 import Notes from './components/Dashboard/Notes';
+import Calendar from './components/Dashboard/Calendar';
 function App() {
   return (
     <div className="App">
@@ -55,6 +56,14 @@ function App() {
               element={
                 <RequireAuth>
                   <Notes />
+                </RequireAuth>
+              }
+            />
+            <Route
+              path="calendar"
+              element={
+                <RequireAuth>
+                  <Calendar />
                 </RequireAuth>
               }
             />

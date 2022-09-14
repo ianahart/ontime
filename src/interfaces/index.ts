@@ -16,6 +16,15 @@ export interface IBillForm {
   amount: { name: string; value: string; error: string };
 }
 
+export interface IEvent {
+  title: string;
+  user_id: string;
+  start: Date;
+  end: Date;
+  id: number;
+  created_at: Date;
+}
+
 export interface ISignUp {
   full_name: string;
   email: string;

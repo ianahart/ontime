@@ -1,0 +1,99 @@
+.container {
+  height: 700px;
+  width: 100%;
+}
+
+.formGroup {
+  margin: 3rem auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  label {
+    width: 50%;
+    text-align: left;
+    color: var(--text-color);
+    font-size: 0.85rem;
+  }
+  input {
+    width: 50%;
+    border: 1px solid;
+    border-color: var(--border-color);
+    height: 35px;
+    border-radius: var(--border-radius);
+  }
+}
+
+.calendarContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.btnContainer {
+  margin-top: 5rem;
+  button {
+    height: 45px;
+    transition: all 0.25s ease-in;
+    background: var(--light-blue-color);
+    color: #fff;
+    border: none;
+    border-radius: var(--border-radius);
+    width: 50%;
+    font-size: 1rem;
+    cursor: pointer;
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+}
+
+.trigger {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  svg {
+    margin-right: 0.5rem;
+    color: var(--text-color);
+    font-size: 1.4rem;
+  }
+  p {
+    color: var(--text-color);
+    font-weight: bold;
+  }
+}
+
+.closeIcon {
+  cursor: pointer;
+  display: flex;
+  justify-content: flex-end;
+  margin: 1rem;
+  svg {
+    font-size: 1.7rem;
+  }
+}
+
+.formModal {
+  background: rgba(0, 0, 0, 0.75);
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  padding-top: 3rem;
+}
+
+.form {
+  background: #fff;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  padding: 1rem;
+  width: 450px;
+  margin: 0 auto;
+}
+
+@media (max-width: 600px) {
+  .form {
+    width: 95%;
+  }
+}
