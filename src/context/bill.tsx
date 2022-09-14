@@ -11,6 +11,7 @@ export const BillContext = createContext<IBillContext | null>(null);
 const BillContextProvider = ({ children }: IChildren) => {
   const [bills, setBills] = useState<IBill[]>([]);
   const [billTotal, setBillTotal] = useState(0);
+  const [billsLoading, setBillsLoading] = useState(true);
 
   const resetBills = () => {
     setBills([]);
@@ -18,7 +19,6 @@ const BillContextProvider = ({ children }: IChildren) => {
   };
 
   const calcBillTotal = () => {
-    // @ts-ignore
     const billTotal = bills.reduce((acc, { is_toggled, amount }) => {
       if (is_toggled) {
         return acc + amount;
@@ -29,7 +29,7 @@ const BillContextProvider = ({ children }: IChildren) => {
     setBillTotal(billTotal);
   };
 
-  const getBills = async (user_id: string) => {
+  const getBills = async (user_id: string): Promise<void> => {
     const { data } = await supabase
       .from<IBill>('bills')
       .select('amount, id, user_id, company, due_date, formatted_date, is_toggled')
@@ -102,10 +102,21 @@ const BillContextProvider = ({ children }: IChildren) => {
     await supabase.from('bills').update({ is_toggled }).match({ id });
   };
 
+  const toggleOffBills = async (): Promise<void> => {
+    const updatedBills = bills.map((bill) => {
+      return { ...bill, is_toggled: false };
+    });
+    setBills(updatedBills);
+
+    await supabase.from('bills').upsert(bills);
+    setBillsLoading(false);
+  };
+
   const value = {
     getBills,
     bills,
     billTotal,
+    billsLoading,
     resetBills,
     insertBill,
     updateBillInput,
@@ -114,6 +125,7 @@ const BillContextProvider = ({ children }: IChildren) => {
     toggleRunningBtn,
     deleteBill,
     calcBillTotal,
+    toggleOffBills,
   };
   return <BillContext.Provider value={value}>{children}</BillContext.Provider>;
 };

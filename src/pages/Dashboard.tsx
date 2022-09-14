@@ -1,20 +1,18 @@
 import dashboardStyles from '../styles/pages/Dashboard.module.scss';
-import UserMenu from '../components/Dashboard/UserMenu';
 import Sidebar from '../components/Dashboard/Sidebar';
-import Bills from '../components/Dashboard/Bills';
 import { Outlet } from 'react-router-dom';
 import { AiOutlinePlus } from 'react-icons/ai';
-import { useEffect, ChangeEvent, useContext } from 'react';
+import { ChangeEvent, useContext } from 'react';
 import { BackgroundContext } from '../context/background';
 import { IBackgroundContext, IUserContext } from '../interfaces';
 import { UserContext } from '../context/user';
+import { useEffectOnce } from '../hooks/UseEffectOnce';
 const Dashboard = () => {
   const { background, getBackground, uploadBackground } = useContext(
     BackgroundContext
   ) as IBackgroundContext;
   const { session, profile } = useContext(UserContext) as IUserContext;
-
-  useEffect(() => {
+  useEffectOnce(() => {
     const session = localStorage.getItem('supabase.auth.token');
     if (session) {
       const user = JSON.parse(session ?? '').currentSession.user;

@@ -1,18 +1,22 @@
 import billsStyles from '../../styles/components/dashboard/Bills.module.scss';
 import { AiOutlinePlus } from 'react-icons/ai';
 import ModalForm from './ModalForm';
-import { useEffect, useContext, useState } from 'react';
+import { useEffect, useContext, useState, useCallback } from 'react';
 import { UserContext } from '../../context/user';
-import { IBillContext, IUserContext } from '../../interfaces';
+import { months } from '../../data/initialState';
+import { IBillContext, IMonthContext, IUserContext } from '../../interfaces';
 import { BillContext } from '../../context/bill';
 import { useEffectOnce } from '../../hooks/UseEffectOnce';
+
 import Bill from './Bill';
 import { nanoid } from 'nanoid';
+import { MonthContext } from '../../context/month';
 const Bills = () => {
+  const { checkIfMonthChanged } = useContext(MonthContext) as IMonthContext;
+
   const [modalFormOpen, setModalFormOpen] = useState(false);
-  const { getBills, billTotal, bills, calcBillTotal } = useContext(
-    BillContext
-  ) as IBillContext;
+  const { billsLoading, toggleOffBills, getBills, billTotal, bills, calcBillTotal } =
+    useContext(BillContext) as IBillContext;
   const handleOpenModalForm = () => {
     setModalFormOpen(true);
   };
@@ -25,9 +29,24 @@ const Bills = () => {
     const session = localStorage.getItem('supabase.auth.token');
     const user = JSON.parse(session ?? '').currentSession.user;
     if (!bills.length) {
-      getBills(user.id);
+      const fetchBills = async () => {
+        await getBills(user.id);
+      };
+      fetchBills();
     }
   });
+
+  useEffect(() => {
+    const currentMonth = new Date().getMonth();
+    const wrapper = async () => {
+      const monthChanged = await checkIfMonthChanged(months[currentMonth]);
+      if (monthChanged && billsLoading && bills.length) {
+        await toggleOffBills();
+        return;
+      }
+    };
+    wrapper();
+  }, [billsLoading, toggleOffBills, checkIfMonthChanged, bills.length]);
 
   useEffect(() => {
     calcBillTotal();

@@ -57,8 +57,9 @@ export interface INoteContext {
 }
 
 export interface IBillContext {
-  getBills: (user_id: string) => void;
+  getBills: (user_id: string) => Promise<void>;
   bills: IBill[];
+  billsLoading: boolean;
   billTotal: number;
   resetBills: () => void;
   insertBill: (user: string, form: IBillForm, formatted_date: string) => Promise<void>;
@@ -68,6 +69,7 @@ export interface IBillContext {
   deleteBill: (id: number) => Promise<void>;
   toggleRunningBtn: (id: number, is_toggled: boolean) => Promise<void>;
   calcBillTotal: () => void;
+  toggleOffBills: () => Promise<void>;
 }
 
 export interface IBill {
@@ -79,6 +81,10 @@ export interface IBill {
   formatted_date: string;
   id: number;
   is_toggled: boolean;
+}
+
+export interface IMonthContext {
+  checkIfMonthChanged: (month: string) => Promise<boolean | void>;
 }
 
 export interface IUserContext {
