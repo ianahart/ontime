@@ -20,6 +20,7 @@ const CalendarContainer = () => {
   const [title, setTitle] = useState('');
   const [events, setEvents] = useState<IEvent[]>([]);
   const [formOpen, setFormOpen] = useState(false);
+  const [error, setError] = useState('');
 
   useEffect(() => {
     const fetchEvents = async () => {
@@ -52,6 +53,11 @@ const CalendarContainer = () => {
   };
 
   const handleAddEvent = async (e: MouseEvent<HTMLButtonElement>) => {
+    setError('');
+    if (title.trim().length === 0) {
+      setError('Please add an event title');
+      return;
+    }
     const { data } = await supabase.from('events').insert({
       title,
       start: eventDate,
@@ -65,6 +71,13 @@ const CalendarContainer = () => {
       setFormOpen(false);
     }
   };
+
+  const handleEventSelection = async (e: IEvent) => {
+    const { data, error } = await supabase.from('events').delete().match({ id: e.id });
+    const filtered = events.filter((event) => event.id !== e.id);
+    setEvents(filtered);
+  };
+
   return (
     <div className={calendarStyles.container}>
       {formOpen && (
@@ -78,6 +91,7 @@ const CalendarContainer = () => {
               <label>Event Title</label>
               <input onChange={handleInputChange} value={title} />
             </div>
+            {error && <p className={calendarStyles.error}>{error}</p>}
             <div className={calendarStyles.calendarContainer}>
               <Calendar onChange={handleCalendarChange} value={eventDate} />
             </div>
@@ -93,6 +107,7 @@ const CalendarContainer = () => {
         startAccessor="start"
         endAccessor="end"
         showMultiDayTimes
+        onSelectEvent={handleEventSelection}
         step={60}
       />
       <div onClick={() => setFormOpen(true)} className={calendarStyles.trigger}>

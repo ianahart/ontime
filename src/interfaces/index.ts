@@ -68,6 +68,8 @@ export interface INoteContext {
 export interface IBillContext {
   getBills: (user_id: string) => Promise<void>;
   bills: IBill[];
+  billContextError: string;
+  setBillContextError: (value: string) => void;
   billsLoading: boolean;
   billTotal: number;
   resetBills: () => void;

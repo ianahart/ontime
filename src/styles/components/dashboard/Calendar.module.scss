@@ -92,6 +92,12 @@
   margin: 0 auto;
 }
 
+.error {
+  font-size: 0.85rem;
+  color: var(--error-color);
+  text-align: center;
+}
+
 @media (max-width: 600px) {
   .form {
     width: 95%;

@@ -34,10 +34,22 @@ const ModalForm = ({ handleCloseModalForm }: IModalFormProps) => {
     }));
   };
 
+  const isAmountANumber = () => {
+    if (isNaN(parseInt(form.amount.value))) {
+      return false;
+    }
+    return true;
+  };
+
   const handleOnSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError('');
     if (validateFields()) {
+      return;
+    }
+
+    if (!isAmountANumber()) {
+      setError('Amount must be a valid number');
       return;
     }
 

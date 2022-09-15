@@ -12,6 +12,7 @@ const BillContextProvider = ({ children }: IChildren) => {
   const [bills, setBills] = useState<IBill[]>([]);
   const [billTotal, setBillTotal] = useState(0);
   const [billsLoading, setBillsLoading] = useState(true);
+  const [billContextError, setBillContextError] = useState('');
 
   const resetBills = () => {
     setBills([]);
@@ -81,12 +82,15 @@ const BillContextProvider = ({ children }: IChildren) => {
   };
 
   const updateBillInput = async (name: string, value: string, id: number) => {
-    await supabase
+    const { error } = await supabase
       .from('bills')
       .update({ [name]: value })
       .match({ id });
-  };
 
+    if (error) {
+      setBillContextError('Amount must be a valid number');
+    }
+  };
   const deleteBill = async (id: number) => {
     const filtered = bills.filter((bill) => bill.id !== id);
     setBills(filtered);
@@ -118,6 +122,8 @@ const BillContextProvider = ({ children }: IChildren) => {
     billTotal,
     billsLoading,
     resetBills,
+    billContextError,
+    setBillContextError,
     insertBill,
     updateBillInput,
     handleBillChange,
