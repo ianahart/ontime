@@ -1,0 +1,114 @@
+.container {
+  width: 100%;
+  min-height: 100vh;
+  position: relative;
+}
+
+.formGroup {
+  margin: 3rem auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  label {
+    width: 85%;
+    text-align: left;
+    color: var(--text-color);
+    font-size: 0.85rem;
+    padding-bottom: 0.25rem;
+  }
+  input {
+    width: 85%;
+    border: 1px solid;
+    border-color: var(--border-color);
+    height: 35px;
+    border-radius: var(--border-radius);
+  }
+}
+
+.notesContainer {
+  margin-top: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  background: #f5f5fa;
+  width: 400px;
+}
+
+.quillContainer {
+  width: 800px;
+  margin: 0 auto;
+}
+
+.loadMore {
+  text-align: left;
+  margin: 3rem 0;
+  button {
+    background: var(--light-blue-color);
+    width: 400px;
+    border: none;
+    color: #fff;
+    height: 45px;
+    border-radius: var(--border-radius);
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.25s ease-in;
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+}
+
+.error {
+  font-size: 0.85rem;
+  color: var(--error-color);
+  text-align: center;
+}
+
+.btnContainer {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 3rem;
+  margin-bottom: 2rem;
+}
+
+.edit {
+  border: none;
+  width: 100px;
+  height: 35px;
+  border-radius: 20px;
+  border: 1px solid;
+  border-color: var(--border-color);
+  font-weight: bold;
+  background: #fff;
+  cursor: pointer;
+}
+
+.save {
+  border: none;
+  font-weight: bold;
+  width: 100px;
+  height: 35px;
+  border-radius: 20px;
+  border: 1px solid;
+  background: var(--light-blue-color);
+  color: #fff;
+  cursor: pointer;
+}
+
+@media (max-width: 970px) {
+  .quillContainer {
+    width: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  .notesContainer {
+    width: 95%;
+    margin: 0 auto;
+  }
+  .loadMore {
+    width: 95%;
+    margin: 0 auto;
+  }
+}

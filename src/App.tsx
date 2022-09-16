@@ -11,8 +11,8 @@ import RequireGuest from './components/Mixed/RequireGuest';
 import Settings from './pages/Settings';
 import Bills from './components/Dashboard/Bills';
 import Home from './components/Dashboard/Home';
-import Notes from './components/Dashboard/Notes';
 import Calendar from './components/Dashboard/Calendar';
+import NotePad from './components/Dashboard/NotePad';
 function App() {
   return (
     <div className="App">
@@ -55,7 +55,7 @@ function App() {
               path="notes"
               element={
                 <RequireAuth>
-                  <Notes />
+                  <NotePad />
                 </RequireAuth>
               }
             />

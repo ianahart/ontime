@@ -49,6 +49,7 @@ export interface IProfile {
 export interface INote {
   id: string;
   note: string;
+  title: string;
 }
 
 export interface IBackground {
@@ -67,9 +68,13 @@ export interface IBackgroundContext {
 }
 
 export interface INoteContext {
-  saveNote: (new_note: string, user_id: string) => Promise<void>;
-  getNote: (user_id: string) => Promise<INote | void>;
-  note: INote;
+  saveNote: (new_note: string, user_id: string, title: string) => Promise<void>;
+  getNotes: (user_id: string) => Promise<INote | void>;
+  paginateNotes: (user_id: string) => Promise<INote | void>;
+  updateNote: (value: string, note_id: string, user_id: string) => Promise<void>;
+  deleteNote: (note_id: string, user_id: string) => Promise<void>;
+  notes: INote[];
+  resetNotes: () => void;
 }
 
 export interface IBillContext {
