@@ -16,6 +16,13 @@ export interface IBillForm {
   amount: { name: string; value: string; error: string };
 }
 
+export interface IChartData {
+  company: string;
+  amount: number;
+  id: number;
+  user_id: number;
+}
+
 export interface IEvent {
   title: string;
   user_id: string;

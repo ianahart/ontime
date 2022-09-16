@@ -30,7 +30,7 @@ const Login = () => {
         await getBackground(profile.id);
       };
       fetch();
-      navigate('/dashboard');
+      navigate('/dashboard/home');
     }
   }, [profile, navigate, getBackground]);
 

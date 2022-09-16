@@ -17,7 +17,7 @@ const RequireGuest: React.FC<Props> = ({ children }): JSX.Element => {
   ) {
     return children;
   } else {
-    return <Navigate to="/dashboard" replace state={{ path: location.pathname }} />;
+    return <Navigate to="/dashboard/home" replace state={{ path: location.pathname }} />;
   }
 };
 
