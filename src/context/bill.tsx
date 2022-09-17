@@ -1,7 +1,9 @@
 import { createContext, useState, useEffect } from 'react';
+import dayjs from 'dayjs';
 import supabase from '../config/supabaseClient';
 import { IBill, IBillContext, IBillForm } from '../interfaces';
 import { Calendar } from '../types';
+import moment from 'moment';
 interface IChildren {
   children: React.ReactNode;
 }
@@ -108,7 +110,16 @@ const BillContextProvider = ({ children }: IChildren) => {
 
   const toggleOffBills = async (): Promise<void> => {
     const updatedBills = bills.map((bill) => {
-      return { ...bill, is_toggled: false };
+      const due_date = dayjs(bill.due_date).add(1, 'month');
+      let date = due_date?.toString();
+      date = dayjs(date).format('MM/DD/YYYY');
+
+      return {
+        ...bill,
+        is_toggled: false,
+        due_date: bill.due_date,
+        formatted_date: date,
+      };
     });
     setBills(updatedBills);
 
