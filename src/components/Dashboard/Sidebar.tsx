@@ -2,13 +2,15 @@ import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { GrNotes } from 'react-icons/gr';
 import { UserContext } from '../../context/user';
-import { IUserContext } from '../../interfaces';
+import { INoteContext, IUserContext } from '../../interfaces';
 import { FaUserCircle, FaRegMoneyBillAlt } from 'react-icons/fa';
 import { AiOutlineCalendar, AiOutlineHome } from 'react-icons/ai';
 import sidebarStyles from '../../styles/components/dashboard/Sidebar.module.scss';
+import { NoteContext } from '../../context/note';
 
 const Sidebar = () => {
   const { profile } = useContext(UserContext) as IUserContext;
+  const { resetNotes } = useContext(NoteContext) as INoteContext;
   return (
     <div className={sidebarStyles.container}>
       <div className={sidebarStyles.divider}></div>
@@ -35,7 +37,7 @@ const Sidebar = () => {
           </div>
         </Link>
         <Link to="/dashboard/notes">
-          <div className={sidebarStyles.linkContainer}>
+          <div onClick={resetNotes} className={sidebarStyles.linkContainer}>
             <GrNotes />
             <p>Notes</p>
           </div>

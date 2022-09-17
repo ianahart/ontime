@@ -6,6 +6,8 @@ import { UserContext } from '../../context/user';
 import { INoteContext, IUserContext } from '../../interfaces';
 import { NoteContext } from '../../context/note';
 import Note from './Note';
+import { useEffectOnce } from '../../hooks/UseEffectOnce';
+import { getUser } from '../../data/helpers';
 const NotePad = () => {
   const { profile } = useContext(UserContext) as IUserContext;
   const { resetNotes, notes, saveNote, getNotes, paginateNotes } = useContext(
@@ -15,15 +17,16 @@ const NotePad = () => {
   const [value, setValue] = useState('');
   const [error, setError] = useState('');
 
-  useEffect(() => {
+  useEffectOnce(() => {
+    const userId = getUser();
+
     const fetchNotes = async () => {
-      if (profile) {
-        await getNotes(profile?.id);
+      if (userId) {
+        await getNotes(userId);
       }
     };
     fetchNotes();
-    return () => resetNotes();
-  }, [profile?.id]);
+  });
 
   const handleSaveBtn = async (e: MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();

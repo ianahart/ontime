@@ -31,12 +31,16 @@
     border: none;
     transition: all 0.25s ease-in;
     font-size: 1.1rem;
+    color: #fff;
+
     &:hover {
       opacity: 0.8;
     }
     &:first-of-type {
-      color: #fff;
       background: var(--light-blue-color);
+    }
+    &:last-of-type {
+      background: var(--error-color);
     }
   }
 }

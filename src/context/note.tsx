@@ -32,7 +32,6 @@ const NoteContextProvider = ({ children }: IChildren) => {
   };
 
   const getNotes = async (user_id: string): Promise<INote | void> => {
-    resetNotes();
     const data = await fetchNotes(user_id);
     if (data) {
       setNotes(data);
