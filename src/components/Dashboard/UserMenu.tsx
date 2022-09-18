@@ -6,13 +6,21 @@ import { MdLogout } from 'react-icons/md';
 import userMenuStyles from '../../styles/components/dashboard/UserMenu.module.scss';
 import { useEffectOnce } from '../../hooks/UseEffectOnce';
 import { UserContext } from '../../context/user';
-import { IBackgroundContext, IBillContext, IUserContext } from '../../interfaces';
+import {
+  IBackgroundContext,
+  IBillContext,
+  IContactContext,
+  IUserContext,
+} from '../../interfaces';
 import { BillContext } from '../../context/bill';
 import { backgroundState } from '../../data/initialState';
 import { BackgroundContext } from '../../context/background';
+import { AiOutlineUser } from 'react-icons/ai';
+import { ContactContext } from '../../context/contact';
 
 const UserMenu = () => {
   const navigate = useNavigate();
+  const { resetContacts } = useContext(ContactContext) as IContactContext;
   const { profile, signOut } = useContext(UserContext) as IUserContext;
   const { resetBills } = useContext(BillContext) as IBillContext;
   const { resetBackground } = useContext(BackgroundContext) as IBackgroundContext;
@@ -42,6 +50,7 @@ const UserMenu = () => {
   const handleOnSignOut = async () => {
     await signOut();
     resetBills();
+    resetContacts();
     resetBackground();
     navigate('/');
   };
@@ -64,10 +73,17 @@ const UserMenu = () => {
           <div className={userMenuStyles.header}>
             <p>{profile?.full_name}</p>
           </div>
+
+          <div className={userMenuStyles.settings}>
+            <AiOutlineUser />
+            <Link to="/profile">Profile</Link>
+          </div>
+
           <div className={userMenuStyles.settings}>
             <FiSettings />
             <Link to="/settings">Settings</Link>
           </div>
+
           <div onClick={handleOnSignOut} className={userMenuStyles.logout}>
             <MdLogout />
             <p role="button">Sign out</p>

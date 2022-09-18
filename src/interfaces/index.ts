@@ -171,6 +171,7 @@ export interface IContact {
 }
 
 export interface IContactContext {
+  resetContacts: () => void;
   getContacts: (user_id: string) => Promise<void>;
   paginateContacts: (user_id: string) => Promise<void>;
   removeContact: (id: number) => Promise<void>;

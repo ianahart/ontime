@@ -9,6 +9,7 @@ import Navbar from './components/Mixed/Navbar';
 import RequireAuth from './components/Mixed/RequireAuth';
 import RequireGuest from './components/Mixed/RequireGuest';
 import Settings from './pages/Settings';
+import Profile from './pages/Profile';
 import Bills from './components/Dashboard/Bills';
 import Home from './components/Dashboard/Home';
 import Calendar from './components/Dashboard/Calendar';
@@ -87,6 +88,15 @@ function App() {
               }
             />
           </Route>
+          <Route
+            path="/profile"
+            element={
+              <RequireAuth>
+                <Profile />
+              </RequireAuth>
+            }
+          />
+
           <Route
             path="/settings"
             element={

@@ -120,7 +120,14 @@ const ContactContextProvider = ({ children }: IChildren) => {
     ]);
   };
 
-  const value = { removeContact, paginateContacts, insertContact, getContacts, contacts };
+  const value = {
+    resetContacts,
+    removeContact,
+    paginateContacts,
+    insertContact,
+    getContacts,
+    contacts,
+  };
 
   return <ContactContext.Provider value={value}>{children}</ContactContext.Provider>;
 };

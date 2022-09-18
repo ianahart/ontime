@@ -1,0 +1,153 @@
+.container {
+  min-height: 100vh;
+}
+
+.goBack {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 1rem;
+  cursor: pointer;
+  color: var(--text-color);
+  svg {
+    color: var(--text-color);
+  }
+}
+
+.clearUpload {
+  position: absolute;
+  top: -50px;
+  right: -8px;
+  p {
+    color: var(--blue-color);
+    border: 1px solid;
+    border-color: var(--blue-color);
+    border-radius: 20px;
+    width: 80px;
+    padding: 0.1rem;
+    cursor: pointer;
+  }
+}
+
+.formContainer {
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  background: #fff;
+  min-height: 600px;
+  width: 450px;
+  margin: 10rem auto 1rem auto;
+  h3 {
+    color: var(--text-color);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding-top: 2rem;
+  }
+}
+
+.btnContainer {
+  margin-top: 5rem;
+  button {
+    height: 45px;
+    transition: all 0.25s ease-in;
+    background: var(--light-blue-color);
+    color: #fff;
+    border: none;
+    border-radius: var(--border-radius);
+    width: 85%;
+    font-size: 1rem;
+    cursor: pointer;
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+}
+
+.upload {
+  padding-top: 1rem;
+  color: var(--blue-color);
+  font-size: 2rem;
+}
+
+.imageUpload {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: var(--border-radius);
+  background: rgba(0, 0, 0, 0.7);
+  width: 200px;
+  height: 150px;
+  position: relative;
+}
+
+.imageUploadContainer {
+  margin: 3rem auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  label {
+    width: 85%;
+    text-align: left;
+    color: var(--text-color);
+    font-size: 0.85rem;
+    padding-bottom: 0.25rem;
+  }
+}
+
+.fileName {
+  color: #fff;
+}
+
+.check {
+  font-size: 2rem;
+  color: #198754;
+  padding-top: 1rem;
+}
+
+.imageUploadBorder {
+  border: 1px dashed;
+  border-color: var(--border-color);
+  border-radius: var(--border-radius);
+  height: 140px;
+  margin: 0 auto;
+  width: 190px;
+}
+
+.fileInput {
+  input {
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.formGroup {
+  margin: 3rem auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  label {
+    width: 85%;
+    text-align: left;
+    color: var(--text-color);
+    font-size: 0.85rem;
+    padding-bottom: 0.25rem;
+  }
+  input {
+    width: 85%;
+    border: 1px solid;
+    border-color: var(--border-color);
+    height: 35px;
+    border-radius: var(--border-radius);
+  }
+}
+
+@media (max-width: 600px) {
+  .formContainer {
+    width: 95%;
+  }
+}
