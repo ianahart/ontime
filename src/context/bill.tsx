@@ -32,10 +32,26 @@ const BillContextProvider = ({ children }: IChildren) => {
     setBillTotal(billTotal);
   };
 
+  const getCompanyOrFail = async (
+    company: string,
+    user_id: string
+  ): Promise<string | null> => {
+    const { data } = await supabase
+      .from('bills')
+      .select('id')
+      .ilike('company', `%${company}%`)
+      .eq('user_id', user_id);
+
+    if (data && data.length > 0) {
+      return data[0].id;
+    }
+    return null;
+  };
+
   const getBills = async (user_id: string): Promise<void> => {
     const { data } = await supabase
       .from<IBill>('bills')
-      .select('amount, id, user_id, company, due_date, formatted_date, is_toggled')
+      .select(`*, contacts(file_url)`)
       .eq('user_id', user_id);
 
     if (data) {
@@ -142,6 +158,7 @@ const BillContextProvider = ({ children }: IChildren) => {
     toggleRunningBtn,
     deleteBill,
     calcBillTotal,
+    getCompanyOrFail,
     toggleOffBills,
   };
   return <BillContext.Provider value={value}>{children}</BillContext.Provider>;

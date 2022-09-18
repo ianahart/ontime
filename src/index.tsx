@@ -8,6 +8,7 @@ import BillContextProvider from './context/bill';
 import NoteContextProvider from './context/note';
 import BackgroundContextProvider from './context/background';
 import MonthContextProvider from './context/month';
+import ContactContextProvider from './context/contact';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
@@ -17,7 +18,9 @@ root.render(
         <BillContextProvider>
           <NoteContextProvider>
             <MonthContextProvider>
-              <App />
+              <ContactContextProvider>
+                <App />
+              </ContactContextProvider>
             </MonthContextProvider>
           </NoteContextProvider>
         </BillContextProvider>

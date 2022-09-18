@@ -22,6 +22,7 @@ interface IBillProps {
 }
 
 const Bill = ({ bill }: IBillProps) => {
+  console.log(bill);
   const {
     updateBillInput,
     toggleRunningBtn,
@@ -88,6 +89,7 @@ const Bill = ({ bill }: IBillProps) => {
   return (
     <div className={billStyles.pageWrapper}>
       <div className={billStyles.container}>
+        {bill.contacts[0]?.file_url && <img src={bill.contacts[0]?.file_url} />}
         <div className={billStyles.formGroup}>
           <label>Company</label>
           <input

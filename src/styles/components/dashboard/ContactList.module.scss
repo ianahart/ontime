@@ -1,0 +1,37 @@
+.container {
+  min-height: 800px;
+  width: 100%;
+  position: relative;
+}
+
+.contactListContainer {
+  background: #f8f8fa;
+  width: 400px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.loadMore {
+
+  margin: 3rem 0;
+  button {
+    background: var(--light-blue-color);
+    width: 400px;
+    border: none;
+    color: #fff;
+    height: 45px;
+    border-radius: var(--border-radius);
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.25s ease-in;
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .contactListContainer {
+    width: 95%;
+  }
+}

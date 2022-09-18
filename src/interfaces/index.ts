@@ -6,6 +6,12 @@ export interface IRegisterForm {
   password: { name: string; value: string; error: string; type: string };
 }
 
+export interface IContactForm {
+  company: { name: string; value: string; error: string };
+  phone: { name: string; value: string; error: string };
+  notes: { name: string; value: string; error: string };
+}
+
 export interface IBillForm {
   company: { name: string; value: string; error: string };
   due_date: {
@@ -93,6 +99,7 @@ export interface IBillContext {
   toggleRunningBtn: (id: number, is_toggled: boolean) => Promise<void>;
   calcBillTotal: () => void;
   toggleOffBills: () => Promise<void>;
+  getCompanyOrFail: (company: string, user_id: string) => Promise<string | null>;
 }
 
 export interface IBill {
@@ -104,6 +111,7 @@ export interface IBill {
   formatted_date: string;
   id: number;
   is_toggled: boolean;
+  contacts: { file_url: string }[];
 }
 
 export interface IMonthContext {
@@ -150,4 +158,27 @@ export interface IUser {
   last_sign_in_at?: string;
   role?: string;
   updated_at?: string;
+}
+
+export interface IContact {
+  company: string;
+  bill_id: number;
+  file_url: string;
+  phone: string;
+  notes: string;
+  id: number;
+  user_id: string;
+}
+
+export interface IContactContext {
+  getContacts: (user_id: string) => Promise<void>;
+  paginateContacts: (user_id: string) => Promise<void>;
+  removeContact: (id: number) => Promise<void>;
+  contacts: IContact[];
+  insertContact: (
+    form: IContactForm,
+    file: File | null,
+    user_id: string,
+    bill_id: string
+  ) => Promise<void>;
 }

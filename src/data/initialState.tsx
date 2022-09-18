@@ -10,6 +10,12 @@ export const billFormState = {
   amount: { name: 'amount', value: '', error: '' },
 };
 
+export const contactFormState = {
+  company: { name: 'company', value: '', error: '' },
+  phone: { name: 'phone', value: '', error: '' },
+  notes: { name: 'notes', value: '', error: '' },
+};
+
 export const backgroundState = {
   background_file_name: '',
   background_url: '',

@@ -1,0 +1,26 @@
+.container {
+  width: 100%;
+  position: relative;
+  min-height: 800px;
+}
+
+.actions {
+  margin: 1rem;
+  display: flex;
+  justify-content: flex-end;
+  p {
+    margin: 1rem 2rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--text-color);
+    cursor: pointer;
+  }
+}
+
+.activeView {
+  border-bottom: 2px solid;
+  border-color: var(--light-blue-color);
+}
+
+.view {
+  margin-top: 5rem;
+}

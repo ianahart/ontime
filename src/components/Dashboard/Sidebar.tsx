@@ -4,7 +4,7 @@ import { GrNotes } from 'react-icons/gr';
 import { UserContext } from '../../context/user';
 import { INoteContext, IUserContext } from '../../interfaces';
 import { FaUserCircle, FaRegMoneyBillAlt } from 'react-icons/fa';
-import { AiOutlineCalendar, AiOutlineHome } from 'react-icons/ai';
+import { AiOutlineContacts, AiOutlineCalendar, AiOutlineHome } from 'react-icons/ai';
 import sidebarStyles from '../../styles/components/dashboard/Sidebar.module.scss';
 import { NoteContext } from '../../context/note';
 
@@ -46,6 +46,12 @@ const Sidebar = () => {
           <div className={sidebarStyles.linkContainer}>
             <AiOutlineCalendar />
             <p>Calendar</p>
+          </div>
+        </Link>
+        <Link to="/dashboard/contacts">
+          <div className={sidebarStyles.linkContainer}>
+            <AiOutlineContacts />
+            <p>Contacts</p>
           </div>
         </Link>
       </div>
